@@ -1,8 +1,8 @@
 ## This is the submission to Programming Assignment 2: Lexical Scoping, which is 
-## Peer-evaluated. 
+## peer-evaluated 
 
 
-##  This function creates a special "matrix" object that can cache its inverse
+## This function creates a special matrix object that can cache its inverse
 
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
@@ -11,11 +11,11 @@ makeCacheMatrix <- function(x = matrix()) {
     m <<- NULL
   }
   get <- function() x
-  setmean <- function(mean) m <<- mean
-  getmean <- function() m
+  setsolve <- function(solve) m <<- solve
+  getsolve <- function() m
   list(set = set, get = get,
-       setmean = setmean,
-       getmean = getmean)
+       setsolve = setsolve,
+       getsolve = getsolve)
 }
 
 ## This function computes the inverse of the special "matrix" returned by 
@@ -24,13 +24,13 @@ makeCacheMatrix <- function(x = matrix()) {
 ## the inverse from the cache
 
 cacheSolve <- function(x, ...) {
-  m <- x$getmean()
+  m <- x$getsolve()
   if(!is.null(m)) {
     message("getting cached data")
     return(m)
   }
   data <- x$get()
-  m <- mean(data, ...)
-  x$setmean(m)
+  m <- solve(data, ...)
+  x$setsolve(m)
   m
 }
